@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Welcome Page{% endblock %}
+
+{% block content %}
+  <header>
+    <!-- Full Page Intro -->
+    <div class="view"
+         style="background-image: url('https://mdbootstrap.com/img/Photos/Others/img%20%2848%29.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+      <!-- Mask & flexbox options-->
+      <div class="mask rgba-black-light align-items-center">
+        <!-- Content -->
+        <div class="container">
+          <!--Grid row-->
+          <div class="row">
+            <!--Grid column-->
+            <div class="col-md-12 mb-4 white-text text-center">
+              <h1 class="h1-reponsive white-text text-uppercase font-weight-bold mb-0 pt-md-5 pt-5 wow fadeInDown"
+                  style="color:white;font-size:70px;"><strong>Group 3 Project</strong></h1>
+              <hr class="hr-light my-4 wow fadeInDown" data-wow-delay="0.4s">
+              <h1 class="text-uppercase mb-4 white-text wow fadeInDown" style="color:white;"><strong>Mock Yelp</strong>
+              </h1>
+              <a class="btn btn-outline-secondary" style="color:white;font-size:15px;" href="/map">Search Ya!</a>
+
+              {% if  user_id %}
+                <br><br><br><br><br>
+
+                <h1 style="color:white;font-size:22px;"><strong> Welcome Back! </strong> {{ user_name }}</h1>
+                <br><br><br>
+                <div class="inner">
+                  <h2><a href="/home/{{ user_id }}" class="btn btn-outline-secondary"
+                         style="color:white;font-size:15px;">homepage</a></h2>
+                </div>
+                <div class="inner">
+                  <a href="/logout" class="btn btn-outline-secondary" style="color:white;font-size:15px;">Logout</a>
+                </div>
+
+
+              {% else %}
+                <a href="/login" class="btn btn-outline-secondary" style="color:white;font-size:15px;">Login</a>
+              {% endif %}
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="container">
+      <!--Grid row-->
+      <div class="row py-5">
+      </div>
+      <!--Grid row-->
+    </div>
+  </main>
+  <!--Main Layout-->
+
+{% endblock %}
+

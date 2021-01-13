@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+
+{% block head %}
+  {#  {{ super() }}#}
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
+  <script
+      src="https://maps.googleapis.com/maps/api/js?key=private-goolge-map-api-key&callback=initMap&libraries=&v=weekly"
+      defer
+  ></script>
+  <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css"/>
+  <link rel="stylesheet" type="text/css" href="/static/mapPage.css"/>
+  <script src="/static/mapPage.js"></script>
+{% endblock %}
+
+{% block content %}
+
+
+
+  <nav class="navbar navbar-dark bg-secondary pt-3 pb-3 mb-2">
+    <div class="container-fluid d-flex justify-content-between">
+      <div class="col-3">
+        <select class="form-select" id="state-select" name="state" onchange="stateOnChange(this)">
+          <option value="" selected>Select a state...</option>
+          {% for state in states %}
+            <option value={{ state }}>{{ state }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-3">
+        <select class="form-select" id="city-select" name="city" onchange="cityOnChange(this)">
+          <option value="" selected>Select a city</option>
+        </select>
+      </div>
+      <div class="col-3">
+        <select class="form-select" id="category-select" name="category" onchange="categoryOnChange(this)">
+          <option value="" selected>Select a category</option>
+        </select>
+      </div>
+      <div class="col-3">
+        <button class="btn btn-primary" onclick="onClickSubmit()">Submit</button>
+      </div>
+    </div>
+  </nav>
+
+  <div id="content">
+{#    <div class="container d-flex justify-content-around" id="searchBar">#}
+{#      <div class="col-3">#}
+{#        <select class="form-select" id="state-select" name="state" onchange="stateOnChange(this)">#}
+{#          <option value="" selected>Select a state...</option>#}
+{#          {% for state in states %}#}
+{#            <option value={{ state }}>{{ state }}</option>#}
+{#          {% endfor %}#}
+{#        </select>#}
+{#      </div>#}
+{#      <div class="col-3">#}
+{#        <select class="form-select" id="city-select" name="city" onchange="cityOnChange(this)">#}
+{#          <option value="" selected>Select a city</option>#}
+{#        </select>#}
+{#      </div>#}
+{#      <div class="col-3">#}
+{#        <select class="form-select" id="category-select" name="category" onchange="categoryOnChange(this)">#}
+{#          <option value="" selected>Select a category</option>#}
+{#        </select>#}
+{#      </div>#}
+{#      <div class="col-3">#}
+{#        <button class="btn btn-primary" onclick="onClickSubmit()">Submit</button>#}
+{#      </div>#}
+{#    </div>#}
+    <div class="container-fluid d-flex justify-content-around" id="mapDiv">
+      <div class="col-9" id="map" style="height: 100%"></div>
+      <div class="col-3" id="sideBar" style="height: 100%; overflow: scroll">
+        <div id="sortBtn">
+          <div class="btn btn-primary" onclick="sortByReviewCount()">Sort by review count</div>
+          <div class="btn btn-primary" onclick="sortByStars()">Sort by stars</div>
+        </div>
+        <div id="sideBarContent">
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}

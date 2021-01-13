@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}User Homepage{% endblock %}
+
+{% block head %}
+  {{ super() }}
+  <script src="/static/homePage.js"></script>
+
+{% endblock %}
+
+{% block content %}
+  <div class="container-fluid">
+    <h1>Welcome {{ user.name }}</h1>
+    <div class="row">
+      <div class="col-sm-1">
+      </div>
+
+      <div class="col-sm-6">
+        <div id="userinfo">
+          {% if user %}
+            <p>user_id: {{ user.user_id }}</p>
+            <p>name: {{ user.name }}</p>
+            <p>review count: {{ user.review_count }}</p>
+            <p>average stars: {{ user.average_stars }}</p>
+          {% else %}
+            <p>user_id does not exist</p>
+          {% endif %}
+        </div>
+
+        <div id="recommendation">
+          <h3>Recommended Friends</h3>
+          {% if recommend_friends %}
+            <ul class="list-group cProductsList" style="margin-top: 30px;">
+              {% for item in recommend_friends %}
+                <li class="list-group-item d-flex justify-content-between " style="font-size:13px" id="item-{{ item.user_node.user_id }}">
+                  <p class="p-0 m-0 flex-grow-1">
+                    <b>name:</b> {{ item.user_node.name }}; <b align="center"> {{ item.occ }}</b> mutual friends
+                  </p>
+                  <button class="btn btn-secondary"
+                          onclick='addFriend({{ user.user_id | tojson }}, {{ item.user_node.user_id | tojson }},
+                              {{ item.user_node.name | tojson }})'
+                  >Add Friend</button>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p>No friends recommendation</p>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-sm-5">
+        <div id="friends">
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <script>
+    loadFriends({{ user_id | tojson}});
+  </script>
+
+{% endblock %}
